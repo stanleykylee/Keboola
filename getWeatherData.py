@@ -1,3 +1,16 @@
+#!/usr/bin/env python
+"""
+Title:          getWeatherData.py
+Description:    Experimental script to obtain geocode via Google Maps API requests.
+Author:         Stanley Lee
+Date:           April 5, 2017
+Version:        0.1
+Usage:          python getWeatherData.py
+Python Version: 3.5.3
+
+This python script was used to prototype obtaining geocode data via Google Maps API from postal code data. It also
+used pandas to explore the locations.csv to be used to the task carried out in weather_analysis.ipynb.
+"""
 import requests
 import pandas as pd
 import re
@@ -5,6 +18,7 @@ import re
 
 # get lon and lat geo coordinates
 def get_geo_coordinates(row):
+    long, lat = 0, 0
     # get geo coordinates via google api
     resp = requests.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + re.sub("\s","%20",row['postal_code']) + "&json=1")
     if resp.status_code != 200:
